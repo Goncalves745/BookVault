@@ -32,7 +32,7 @@ const BookSearch = () => {
 
   return (
     <div className="p-4">
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-2">
         <input
           type="text"
           value={query}
@@ -42,7 +42,7 @@ const BookSearch = () => {
         />
         <button
           onClick={handleSearch}
-          className={`px-4 py-2 bg-blue-500 text-white rounded ${
+          className={`px-4 py-2 bg-lime-800 hover:bg-lime-700 text-white rounded ${
             loading ? 'opacity-50 cursor-not-allowed' : ''
           }`}
           disabled={loading}
@@ -57,23 +57,26 @@ const BookSearch = () => {
         {books.map((book) => (
           <li
             key={book.key}
-            className="bg-white shadow-md rounded-lg p-4 flex flex-col items-center text-center"
+            className="bg-neutral-790  shadow-md rounded-lg p-4 flex flex-col items-center text-center"
           >
-            {book.isbn && (
-              <img
-                src={`https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-L.jpg`}
-                alt={`${book.title} cover`}
-                className="w-32 h-48 object-cover rounded mb-4"
-                loading="lazy"
+            <img
+              src={
+               book.isbn && book.isbn[0]
+                ? `https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-L.jpg`
+                :  "https://via.placeholder.com/128x192.png?text=No+Cover"
+              } 
+              alt={`${book.title} cover`}
+              className="w-32 h-48 object-cover rounded mb-4"
+              loading="lazy"
               />
-            )}
-            <h3 className="text-lg font-semibold text-gray-800 mb-2">{book.title}</h3>
-            <p className="text-sm text-gray-600">
+            
+            <h3 className="text-lg font-semibold text-white mb-2">{book.title}</h3>
+            <p className="text-sm text-white">
               {book.author_name ? book.author_name.join(', ') : 'Unknown Author'}
             </p>
             <button
               onClick={() => navigate('/book', { state: { book } })} // Pass book data
-              className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200"
+              className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-lime-800 transition duration-200"
             >
               Add Book 
             </button>

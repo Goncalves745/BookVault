@@ -6,10 +6,14 @@ export const searchBooks = async (query, cancelToken) => {
   try {
     const response = await axios.get(API_BASE_URL, {
       params: { q: query },
-      limit : 20,
-      cancelToken, // Add the cancel token here
+      cancelToken,
     });
-    return response.data;
+    // Limit results to the first 2 books
+    const limitedResults = {
+      ...response.data,
+      docs: response.data.docs.slice(0, 20), // Limit to 2 results
+    };
+    return limitedResults;
   } catch (error) {
     if (axios.isCancel(error)) {
       console.log('Request canceled:', error.message);
@@ -17,5 +21,4 @@ export const searchBooks = async (query, cancelToken) => {
       throw new Error('Error fetching books');
     }
   }
-  
 };

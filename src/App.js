@@ -5,6 +5,7 @@ import Navbar from './components/navbar';
 import BookSearch from './components/booksearch';
 import HomePage from './components/homepage';
 import BookPage from './components/BookPage';
+import './App.css'
 
 const App = () => {
   return (
